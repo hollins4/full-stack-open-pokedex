@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - new_branch
+  pull_request:
+    branches: [new_branch]
+    types: [opened, synchronize]
 
 jobs:
   a_test_job:
