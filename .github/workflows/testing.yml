@@ -30,7 +30,7 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
 
       - name: gihub contextSkip
-        if: ${{ !contains(join(github.event.commits.*.message, ','), '#skip') }}
+        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
