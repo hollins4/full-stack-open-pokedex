@@ -36,11 +36,13 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
       - name: commitsSkip
+        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
 
       - name: commit messagesSkip
+        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
