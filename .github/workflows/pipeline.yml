@@ -30,11 +30,18 @@ jobs:
       - name: Test
         run: npm run test
 
-
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with: 
           start: npm run start-prod
+      
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
          
       - name: Deploy to Heroku
         if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
@@ -46,6 +53,15 @@ jobs:
           healthcheck: "https://nameless-plains-04636.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        if: success()
+        with:
+            severity: info
+            details: Test Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   
   tag_release:
     needs: [simple_deployment_pipeline]
