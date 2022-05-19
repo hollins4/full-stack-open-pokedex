@@ -40,7 +40,7 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          details: The build has failed, app not deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
          
       - name: Deploy to Heroku
