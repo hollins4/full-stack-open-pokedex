@@ -56,7 +56,6 @@ jobs:
       
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         if: success()
         with:
             severity: info
