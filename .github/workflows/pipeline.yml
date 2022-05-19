@@ -35,14 +35,6 @@ jobs:
         with: 
           start: npm run start-prod
       
-      - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
-        if: failure()
-        with:
-          severity: error
-          details: The build has failed, app not deployed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-         
       - name: Deploy to Heroku
         if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -61,6 +53,15 @@ jobs:
             severity: info
             details: Test Succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: The build has failed, app not deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+         
   
   tag_release:
     needs: [simple_deployment_pipeline]
