@@ -2,8 +2,8 @@ name: Health Check
 
 on:
   push:
-    branches: 
-      -master
+    branches:
+      - master
 
 jobs:
   health_check_job2:
