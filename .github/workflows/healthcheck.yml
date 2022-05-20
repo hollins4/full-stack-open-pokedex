@@ -7,6 +7,7 @@ on:
 
 jobs:
   health_check_job2:
+    runs-on: ubuntu-20.04
     steps:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v2
