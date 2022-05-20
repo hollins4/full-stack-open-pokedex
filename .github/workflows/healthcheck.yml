@@ -5,10 +5,8 @@ on:
     branches: 
       -master
 
-
 jobs:
-  health_check:
-    runs-on: ubuntu-20.04
+  health_check_job2:
     steps:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v2
@@ -22,4 +20,4 @@ jobs:
           # Delay between retries
           retry-delay: 5s # Optional, only applicable to max-attempts > 1
           # Retry all errors, including 404. This option might trigger curl upgrade.
-          retry-all: false # Optional, defaults to "false"
+          retry-all: false 
