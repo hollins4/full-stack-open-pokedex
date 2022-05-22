@@ -45,9 +45,9 @@ jobs:
           healthcheck: "https://nameless-plains-04636.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-       
+   
 
-         
+       
   
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -60,3 +60,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+
